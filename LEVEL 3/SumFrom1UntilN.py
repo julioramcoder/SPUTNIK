@@ -1,7 +1,7 @@
 #Now we are gonna ask to user a number "n" and the code it will make a sum until that number
 
 #it's necesary make a varible call sum, because we need to save all the information about the suma here, and could use after
-sum = 2
+sum = 0
 
 #ask a number n
 n=int(input("please type a number n: "))
