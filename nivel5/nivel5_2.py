@@ -6,6 +6,7 @@ class item:
         self.itemPrice = itemPrice                     #solo cambié la salida y las propiedades de la clase
         self.itemCount = itemCount
         self.total = itemCount*itemPrice
+    
 
 lista = []                                           #en esta lista voy a guardar las instancias/objetos de la clase nota
 while True:                                          #bucle while para hacer el menu
