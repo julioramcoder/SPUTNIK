@@ -34,10 +34,10 @@ failed = " less than or equal to 5"
 
 #now with the commands for, if, elif and else, we define the grading ranges
 
-for julio in range (len(GRADES)):
-    grade = GRADES[julio]
-    student = STUDENTS[julio]
-
+for julio in range (len(GRADES)): #Basically len read all the items into the list and returns them.
+    grade = GRADES[julio] #Julio is the iterator function that iterates through the values ​​and returns them
+    student = STUDENTS[julio]# so since that is already defined, we have to make it clear to Python that Julio will iterate through the values ​​of grade and name at the same time
+#at the end we can ask to code to show us what happen, using if, elif and else and print the results
     if grade>=8:
         print("your grade it's EXCELENT .Congratulation",student,":)")
     elif grade>=6:
