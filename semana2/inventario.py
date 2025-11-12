@@ -104,4 +104,12 @@ Deja un comentario final resumiendo el objetivo de la semana."""
 
 
 
-    
+def agregarProducto():
+    itemName = input("Nombre del producto: ")
+    itemPrice = float(input("Precio del producto: "))
+    itemCantidad = int(input("Cantidad de producto: "))
+
+    addNewItem(itemName, itemPrice, itemCantidad)
+    print(f"Agregado producto: {itemName} con un precio de: {itemPrice} y una cantidad de: {itemCantidad}")
+
+#mostrar_inventario ya está definida, en la task3 hice la función showItems
