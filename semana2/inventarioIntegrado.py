@@ -28,14 +28,7 @@ def agregarProducto():
     addNewItem(itemName, itemPrice, itemCantidad)
     print(f"Agregado producto: {itemName} con un precio de: {itemPrice} y una cantidad de: {itemCantidad}")
 
-def showItems():
-    if not inventario:
-        print("Aun no hay productos en el inventario")
-    else:
-        print(f"{'Producto':<25} {'Precio':<10} {'Cantidad':<10}")
-        print("-" * 45)
-        for item in inventario:
-            print(f"{item["nombre"]:<25} {item["precio"]:<10.2f} {item["cantidad"]:<10}")
+
 
 # funciones de estadística:
 
@@ -48,19 +41,21 @@ def cantidadTotal():
     total = 0
     for item in inventario:
         total += item["cantidad"]
-    print(f"La cantidad total de productos es: ") 
+    print(f"La cantidad total de productos es: {total}\n") 
     return total
 
 def precioTotal():
     total = 0
     for item in inventario:
         total += totalItem(item)
+    print(f"El precio total del inventario es: {total}\n")
 
 #-------------------------------------------------------------------------------
 # Funciones menu
 
 def agregarProductoMenu():
     agregarProducto()
+    print("--------------------------------------------------------\n")
     while True:
         print("1: Agregar nuevo item: ")
         print("2: Salir: ")
@@ -68,43 +63,91 @@ def agregarProductoMenu():
 
         if menu == 1:
             agregarProducto()
+            print("--------------------------------------------------------\n")
         elif menu == 2:
-            print("Volviendo al menu principal"); break
+            print("Volviendo al menu principal")
+            showMenu()
+            break
         else: print("opción inválida")
+        print("--------------------------------------------------------\n")
+
+
+def showItems():
+    if not inventario:
+        print("Aun no hay productos en el inventario")
+    else:
+        print(f"{'Producto':<25} {'Precio':<10} {'Cantidad':<10}")
+        print("-" * 45)
+        for item in inventario:
+            print(f"{item["nombre"]:<25} {item["precio"]:<10.2f} {item["cantidad"]:<10}")
+    print("-----------------------------------------------------------------------\n")
+    showMenu()
+
+def estadisticas():
+    while True:
+        print("1: cantidad total de inventario: ")
+        print("2: costo total de inventario: ")
+        print("3: salir")
+        try:
+            menu= int(input)
+        except ValueError:
+            menu = 5
+            continue
+
+        match menu:
+            case 1:
+                cantidadTotal()
+            case 2:
+                precioTotal()
+            case 3:
+                print("volviendo al menu principal")
+                showMenu()
+                break
+            case _: print("opción inválida")
 
 #-------------------------------------------------------------------------------
 # Menu
 
 
 
+def showMenu():
 
-print("Bienvenido a inventariofacil.com \nElige una opción: ")
+    print("Bienvenido a inventariofacil.com \nElige una opción: ")
 
-print("1: Agregar producto")
-print("2: Mostrar inventario")
-print("3: Calcular estadísticas")
-print("4: Salir\n")
+    print("1: Agregar producto")
+    print("2: Mostrar inventario")
+    print("3: Calcular estadísticas")
+    print("4: Salir\n")
+
+showMenu()
 
 while True:
-    menu = ""
+    
     try:
         menu = int(input())
-        break
+        
     except ValueError:
         print("Ingresa una opción válida")
-    
+        continue
+        
     match menu:
         case 1:
-            print("caso 1")
+            print("Agregar nuevo producto: \n")
             agregarProductoMenu()
+            
+        case 2:
+            print("Mostrar inventario\n")
+            showItems()
+        case 3:
+            print("Calcular estadísticas\n")
+            estadisticas()
+        case 4:
+            print("saliendo");break
+        case _:
+            print("Opción inválida\n")
 
 
     
-
-
-
-
-
             
 
 
