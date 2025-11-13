@@ -118,9 +118,7 @@ def modificar_paciente():
     input("Presione Enter para volver al menú...")
 
 def generar_reportes():
-    """
-    Muestra un submenú para generar los reportes solicitados en el punto 5.
-    """
+   
     print("\n--- Módulo de Reportes ---")
     if not pacientes:
         print("No hay pacientes registrados para generar reportes.")
