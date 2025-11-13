@@ -4,7 +4,7 @@
 
 
 paciente1 = {
-"nombre" : "Juan carlos p",
+"nombre" : "Juan Carlos P",
 "id" : 12345,
 "genero" : "Masculino",
 "edad" : 24,
@@ -13,7 +13,7 @@ paciente1 = {
 }
 
 paciente2 = {
-"nombre" : "Dayana francisca",
+"nombre" : "Dayana Francisca",
 "id" : 123456,
 "genero" : "femenino",
 "edad" : 25,
@@ -88,12 +88,28 @@ def agregarautomatico():
         edad = item["edad"]
         diagnostico = item["diagnostico"]
         historial = item["historial"]
-        addNuevoPaciente(id,nombre,genero,edad,diagnostico,historial)
+        addNuevoPaciente(id, nombre, edad,genero,diagnostico, historial)
 agregarautomatico()
     
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 #            Funciones para filtrar lista de pacientes        
+def filtrarPorID(_id):
+    encontrado = encontrarPacienteID(_id)
+    if encontrado[0]:
+       
+        print(f"Nombre: {encontrado[1]["nombre"]}")
+        print(f"Identificación: {encontrado[1]["id"]}")
+        print(f"Edad: {encontrado[1]["edad"]}")
+        print(f"Genero: {encontrado[1]["genero"]}")
+        print(f"Diagnostico: {encontrado[1]["diagnostico"]}")
+        print(f"historial: {encontrado[1]["historial"]}")   
+        
+        
+
+    else: print("No encontrado! Por favor ingresa ID correcto")
+
+
 
 def filtrarPorNombre(_nombre):
     listaFiltrada = []
@@ -101,6 +117,7 @@ def filtrarPorNombre(_nombre):
         if paciente["nombre"] == _nombre:
             listaFiltrada.append(paciente)
     if listaFiltrada:
+        print(listaFiltrada)
         return listaFiltrada
     else: print(f"No hay pacientes con el nombre: {_nombre}")
             
@@ -111,6 +128,7 @@ def filtrarPorDiagnostico(_diagnostico):
         if paciente["diagnostico"] == _diagnostico:
             listaFiltrada.append(paciente)
     if listaFiltrada:
+        print(listaFiltrada)
         return listaFiltrada
     else: print(f"No hay pacientes con el diagnóstico de: {_diagnostico}")
 
@@ -234,6 +252,7 @@ def menuBusqueda():
         elif opcion == 2:
             ID= int(input("\nPor favor ingrese ID del paciente: "))
             print (f"\nBuscando paciente que con el ID {ID}...Espere un momento por favor.\n")
+            filtrarPorID(ID)
             break
             
             
@@ -250,22 +269,22 @@ def menuBusqueda():
             print("\n=======ERROR!!!, El sistena no reconoce este valor,por favor vuelva a ingresar=======\n")
 
 #-------------------------------------------------------------------------------------------------------------------------
-#           Menu funciones registors
-
+#           Menu funciones registros
+#Inicio de la función crear y mostrar los reportes del sistema 
 def generar_reportes():
-   
+#Si en la lista de pacientes no se encuentra nada nos avisara que no hay ningun reporte.   
     print("\n--- Módulo de Reportes ---")
     if not listaDePacientes:
         print("No hay pacientes registrados para generar reportes.")
         input("Presione Enter para volver al menú...")
         return
-
+#Se muestra el submenu de reportes
     print("Seleccione el reporte que desea generar:")
     print("1. Pacientes mayores de 60 años")
     print("2. Diagnósticos más frecuentes")
     print("3. Cantidad total de pacientes")
     print("4. Mostras pacientes")
-
+#el metodo strip() nos elimina los espacios si se ingresan erroneamente
     opcion_reporte = input("Seleccione una opción: ").strip()
 
     if opcion_reporte == "1":
