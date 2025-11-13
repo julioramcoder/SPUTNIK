@@ -19,8 +19,9 @@ def encontrarPacienteID(_id):
     return False , None
 
 def addNuevoPaciente(_id, _nombre, _edad,_genero,_diagnostico, _historial):
-    
-    if not encontrarPacienteID(_id):
+    encontrado = encontrarPacienteID(_id)
+    encontrado = encontrado[0]
+    if not encontrado:
         nuevoPaciente = crearNuevoPaciente(_id, _nombre, _edad,_genero,_diagnostico, _historial)
         listaDePacientes.append(nuevoPaciente)
     else: print("El paciente actualmente se encuentra registrado")
@@ -33,7 +34,7 @@ def filtrarPorNombre(_nombre):
     listaFiltrada = []
     for paciente in listaDePacientes:
         if paciente["nombre"] == _nombre:
-            listaFiltrada.append[paciente]
+            listaFiltrada.append(paciente)
     if listaFiltrada:
         return listaFiltrada
     else: print(f"No hay pacientes con el nombre: {_nombre}")
@@ -59,12 +60,4 @@ def eliminarPaciente(_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #       Funciones modificar paciente
 
-def modificarPaciente(_paciente,_cualidad):
-    
-
-
-        
-
-
-
-
+#def modificarPaciente(_paciente,_cualidad):
