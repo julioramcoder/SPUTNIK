@@ -1,3 +1,55 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#
+#                         Funciones para inicializar una lista de pacientes
+
+
+paciente1 = {
+"nombre" : "Juan carlos p",
+"id" : 12345,
+"genero" : "Masculino",
+"edad" : 24,
+"diagnostico" : "covid",
+"historial" : ["reservado"]
+}
+
+paciente2 = {
+"nombre" : "Dayana francisca",
+"id" : 123456,
+"genero" : "femenino",
+"edad" : 25,
+"diagnostico" : "fiebre",
+"historial" : ["reservado"]
+}
+
+paciente3 = {
+"nombre" : "esteban",
+"id" : 1234567,
+"genero" : "Masculino",
+"edad" : 67,
+"diagnostico" : "urselas",
+"historial" : ["reservado"]
+}
+
+paciente4={
+"nombre" : "jhonatan fernandez",
+"id" : 123456789,
+"genero" : "Masculino",
+"edad" : 54,
+"diagnostico" : "fiebre",
+"historial" : ["reservado"]
+}
+
+paciente5 = {
+"nombre" : "natalia dallas",
+"id" : 1234567890,
+"genero" : "femenino",
+"edad" : 28,
+"diagnostico" : "dolor de amores",
+"historial" : ["reservado"]
+}
+
+listaAuto = [paciente1,paciente2,paciente3,paciente4,paciente5]
+
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #                           Funciones 
@@ -26,6 +78,18 @@ def addNuevoPaciente(_id, _nombre, _edad,_genero,_diagnostico, _historial):
         nuevoPaciente = crearNuevoPaciente(_id, _nombre, _edad,_genero,_diagnostico, _historial)
         listaDePacientes.append(nuevoPaciente)
     else: print("El paciente actualmente se encuentra registrado")
+
+def agregarautomatico():
+
+    for item in listaAuto:
+        nombre = item["nombre"]
+        id = item["id"]
+        genero = item["genero"]
+        edad = item["edad"]
+        diagnostico = item["diagnostico"]
+        historial = item["historial"]
+        addNuevoPaciente(id,nombre,genero,edad,diagnostico,historial)
+agregarautomatico()
     
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,42 +213,41 @@ def menuBusqueda():
     
     "==============DISPONIBILIDAD================"
         
-    print("1. Nombre parcial del paciente.\n ")   
+    print("1. Nombre completo del paciente.\n   ") 
         
-    print("2. Nombre completo del paciente.\n   ") 
+    print("2. ID del paciente.\n ")
         
-    print("3. ID del paciente.\n ")
-        
-    print("4. Diagnostico del paciente.\n  ")
+    print("3. Diagnostico del paciente.\n  ")
         
     while True:
         
-        opcion = int(input("Teniendo en cuenta las ocpciones anteriores, ¿Con cual desea realizar la busqueda del paciente?: "))
+        opcion = int(input("Elige una opción: "))
         
-        if opcion > 4 or opcion < 1:
-            print("\n=======ERROR!!!, El sistena no reconoce este valor,por favor vuelva a ingresar=======\n")
-            
-        elif opcion == 1:
-            nombre_parcial= input("\nPor favor ingrese su numbre parcial: ")
-            print (f"\nBuscando paciente que con nombre parcial{nombre_parcial}...Espere un momento por favor.\n")
-            print (f"El paciente {nombre_parcial} ha sido encontrado en la base de datos, procederemos con su consulta...")
-        
-        
-        elif opcion == 2:
+          
+        if opcion == 1:
             nombre_completo= input("\nPor favor ingrese su numbre completo: ")
             print (f"\nBuscando paciente que con el nombre {nombre_completo}....Espere un momento por favor.\n")
-            print (f"El paciente {nombre_completo} ha sido encontrado en la base de datos, procederemos con su consulta...")
+            filtrarPorNombre(nombre_completo)
+            break
+            
     
-        elif opcion == 3:
-            ID= int(input("\nPor favor ingrese su numbre parcial: "))
+        elif opcion == 2:
+            ID= int(input("\nPor favor ingrese ID del paciente: "))
             print (f"\nBuscando paciente que con el ID {ID}...Espere un momento por favor.\n")
-            print (f"El paciente {ID} ha sido encontrado en la base de datos, procederemos con su consulta...")
+            break
+            
+            
                 
         
-        elif opcion == 4:
+        elif opcion == 3:
             Diagnostico= input("\nPor favor ingrese su diagnostico para realizar un filtro entre todos los registrados: ")
-            print (f"\nBuscando paciente que con diagnostico coincidente con {Diagnostico}...Espere un momento por favor.\n")
-            print (f"El paciente {Diagnostico} ha sido encontrado en la base de datos, procederemos con su consulta...\n")
+            print (f"\nBuscando pacientes que con diagnostico coincidente con {Diagnostico}...Espere un momento por favor.\n")
+            filtrarPorDiagnostico(Diagnostico)
+            break
+
+        
+        else:
+            print("\n=======ERROR!!!, El sistena no reconoce este valor,por favor vuelva a ingresar=======\n")
 
 #-------------------------------------------------------------------------------------------------------------------------
 #           Menu funciones registors
