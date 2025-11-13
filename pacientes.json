@@ -1,0 +1,52 @@
+[
+    {
+        "nombre": "Juan Carlos P",
+        "id": 12345,
+        "genero": "Masculino",
+        "edad": 24,
+        "diagnostico": "covid",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "Dayana Francisca",
+        "id": 123456,
+        "genero": "femenino",
+        "edad": 25,
+        "diagnostico": "fiebre",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "esteban",
+        "id": 1234567,
+        "genero": "Masculino",
+        "edad": 67,
+        "diagnostico": "urselas",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "jhonatan fernandez",
+        "id": 123456789,
+        "genero": "Masculino",
+        "edad": 54,
+        "diagnostico": "fiebre",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "natalia dallas",
+        "id": 1234567890,
+        "genero": "femenino",
+        "edad": 28,
+        "diagnostico": "dolor de amores",
+        "historial": [
+            "reservado"
+        ]
+    }
+]

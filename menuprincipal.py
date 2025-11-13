@@ -2,60 +2,20 @@
 #
 #                         Funciones para inicializar una lista de pacientes
 
+import json
 
-paciente1 = {
-"nombre" : "Juan Carlos P",
-"id" : 12345,
-"genero" : "Masculino",
-"edad" : 24,
-"diagnostico" : "covid",
-"historial" : ["reservado"]
-}
 
-paciente2 = {
-"nombre" : "Dayana Francisca",
-"id" : 123456,
-"genero" : "femenino",
-"edad" : 25,
-"diagnostico" : "fiebre",
-"historial" : ["reservado"]
-}
+with open("pacientes.json", "r") as archivo:
+    listaDePacientes  = json.load(archivo)
 
-paciente3 = {
-"nombre" : "esteban",
-"id" : 1234567,
-"genero" : "Masculino",
-"edad" : 67,
-"diagnostico" : "urselas",
-"historial" : ["reservado"]
-}
-
-paciente4={
-"nombre" : "jhonatan fernandez",
-"id" : 123456789,
-"genero" : "Masculino",
-"edad" : 54,
-"diagnostico" : "fiebre",
-"historial" : ["reservado"]
-}
-
-paciente5 = {
-"nombre" : "natalia dallas",
-"id" : 1234567890,
-"genero" : "femenino",
-"edad" : 28,
-"diagnostico" : "dolor de amores",
-"historial" : ["reservado"]
-}
-
-listaAuto = [paciente1,paciente2,paciente3,paciente4,paciente5]
-
+def actializarListaDePacientes():
+    with open("pacientes.json", "w") as archivo:
+        json.dump(listaDePacientes,archivo,indent=4)
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #                           Funciones 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
-listaDePacientes = []
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 #                   Funciones para agregar a un paciente, verificando que la id sea única
@@ -77,20 +37,10 @@ def addNuevoPaciente(_id, _nombre, _edad,_genero,_diagnostico, _historial):
     if not encontrado:
         nuevoPaciente = crearNuevoPaciente(_id, _nombre, _edad,_genero,_diagnostico, _historial)
         listaDePacientes.append(nuevoPaciente)
+        actializarListaDePacientes()
     else: print("El paciente actualmente se encuentra registrado")
 
-def agregarautomatico():
 
-    for item in listaAuto:
-        nombre = item["nombre"]
-        id = item["id"]
-        genero = item["genero"]
-        edad = item["edad"]
-        diagnostico = item["diagnostico"]
-        historial = item["historial"]
-        addNuevoPaciente(id, nombre, edad,genero,diagnostico, historial)
-agregarautomatico()
-    
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 #            Funciones para filtrar lista de pacientes        
@@ -98,12 +48,13 @@ def filtrarPorID(_id):
     encontrado = encontrarPacienteID(_id)
     if encontrado[0]:
        
-        print(f"Nombre: {encontrado[1]["nombre"]}")
-        print(f"Identificación: {encontrado[1]["id"]}")
-        print(f"Edad: {encontrado[1]["edad"]}")
-        print(f"Genero: {encontrado[1]["genero"]}")
-        print(f"Diagnostico: {encontrado[1]["diagnostico"]}")
-        print(f"historial: {encontrado[1]["historial"]}")   
+        print(f"Nombre: {encontrado[1]['nombre']}")
+        print(f"Identificación: {encontrado[1]['id']}")
+        print(f"Edad: {encontrado[1]['edad']}")
+        print(f"Genero: {encontrado[1]['genero']}")
+        print(f"Diagnostico: {encontrado[1]['diagnostico']}")
+        print(f"Historial: {encontrado[1]['historial']}")
+
         
         
 
@@ -138,7 +89,22 @@ def filtrarPorDiagnostico(_diagnostico):
 def eliminarPaciente(_id):
     pacienteEliminar = encontrarPacienteID(_id)
     if pacienteEliminar[0] == True:
+        print(f"paciente: {pacienteEliminar[1]['nombre']} eliminado correctamente ")
         listaDePacientes.remove(pacienteEliminar[1])
+        
+        actializarListaDePacientes()
+
+def eliminarPacienteMenu():
+    
+    _id = ""
+    while True:
+        try:
+            _id = int(input("ID del paciente a eliminar: "))
+            break
+        except ValueError:
+            print("Ingrese una ID correcta")
+    eliminarPaciente(_id)
+
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #       Funciones modificar paciente
@@ -177,6 +143,7 @@ def modificar_paciente():
                 if confirmar == "s":
                     p["edad"] = nueva_edad
                     print("Edad actualizada correctamente.")
+                    actializarListaDePacientes()
                 else:
                     print("Cambio cancelado.")
 
@@ -186,6 +153,7 @@ def modificar_paciente():
                 if confirmar == "s":
                     p["diagnostico"] = nuevo_diagnostico
                     print("Diagnóstico actualizado correctamente.")
+                    actializarListaDePacientes()
                 else:
                     print("Cambio cancelado.")
 
@@ -195,6 +163,7 @@ def modificar_paciente():
                 if confirmar == "s":
                     p["historial"].append(nueva_entrada)
                     print("Nueva entrada agregada al historial.")
+                    actializarListaDePacientes()
                 else:
                     print("Cambio cancelado.")
             else:
@@ -398,7 +367,7 @@ while True:
     elif opcion == "4":
         print("Eliminar pacientes")
         
-        eliminarPaciente(23)
+        eliminarPacienteMenu()
         
     elif opcion == "5":
         print("Generar reportes")
