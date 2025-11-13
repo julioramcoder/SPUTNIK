@@ -61,66 +61,10 @@ def eliminarPaciente(_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 #       Funciones modificar paciente
 
-#def modificarPaciente(_paciente,_cualidad):
-
-pacientes = []  
-
-def agregar_paciente():
-    print("\n--- Registrar nuevo paciente ---")
-    try:
-        id_paciente = int(input("Ingrese ID del paciente: ").strip())
-    except ValueError:
-        print("El ID debe ser un número entero.")
-        return
-    
-    for paciente in pacientes:
-        if paciente["id"] == id_paciente:
-            print("Este ID ya existe. No se puede registrar un duplicado.")
-            return
-    
-    nombre = input("Ingrese nombre del paciente: ")
-    edad = input("Ingrese edad del paciente: ")
-    genero = input("Ingrese género del paciente: ")
-    diagnostico = input("Ingrese diagnóstico: ")
-    historial = []
-
-    while True:
-        entrada = input("Agregar entrada al historial (o presione Enter para terminar): ")
-        if entrada == "":
-            break
-        historial.append(entrada)
-    
-    nuevo_paciente = {
-        "id": id_paciente,
-        "nombre": nombre,
-        "edad": edad,
-        "genero": genero,
-        "diagnostico": diagnostico,
-        "historial": historial
-    }
-
-    pacientes.append(nuevo_paciente)
-    print("Paciente registrado correctamente.\n")
-
-
-def mostrar_pacientes():
-    print("\n--- Lista de pacientes registrados ---")
-    if not pacientes:
-        print("No hay pacientes registrados.")
-        return
-    
-    for p in pacientes:
-        print(f"\nID: {p['id']}")
-        print(f"Nombre: {p['nombre']}")
-        print(f"Edad: {p['edad']}")
-        print(f"Género: {p['genero']}")
-        print(f"Diagnóstico: {p['diagnostico']}")
-        print(f"Historial: {', '.join(p['historial']) if p['historial'] else 'Sin historial'}")
-
 
 def modificar_paciente():
     print("\n--- Modificar datos de un paciente ---")
-    if not pacientes:
+    if not listaDePacientes:
         print("No hay pacientes registrados.")
         input("Presione Enter para volver al menú...")
         return
@@ -132,7 +76,7 @@ def modificar_paciente():
         input("Presione Enter para volver al menú...")
         return
 
-    for p in pacientes:
+    for p in listaDePacientes:
         if p["id"] == id_paciente:
             print(f"\nPaciente encontrado: {p['nombre']}")
             print(f"Edad actual: {p['edad']}")
@@ -179,10 +123,76 @@ def modificar_paciente():
     print("No se encontró ningún paciente con ese ID.")
     input("Presione Enter para volver al menú...")
 
+#def modificarPaciente(_paciente,_cualidad):
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#      Función imprimir lista de pacientes
+
+def mostrar_pacientes():
+    print("\n--- Lista de pacientes registrados ---")
+    if not listaDePacientes:
+        print("No hay pacientes registrados.")
+        return
+    
+    for p in listaDePacientes:
+        print(f"\nID: {p['id']}")
+        print(f"Nombre: {p['nombre']}")
+        print(f"Edad: {p['edad']}")
+        print(f"Género: {p['genero']}")
+        print(f"Diagnóstico: {p['diagnostico']}")
+        print(f"Historial: {', '.join(p['historial']) if p['historial'] else 'Sin historial'}")
+#----------------------------------------------------------------------------------------------------------------------------
+#         Funcion moduloBusqueda
+
+def menuBusqueda():
+    print ("Señor usuario, a continuacion podra observar las opciones para buscar a un paciente.\n")
+    
+    "==============DISPONIBILIDAD================"
+        
+    print("1. Nombre parcial del paciente.\n ")   
+        
+    print("2. Nombre completo del paciente.\n   ") 
+        
+    print("3. ID del paciente.\n ")
+        
+    print("4. Diagnostico del paciente.\n  ")
+        
+    while True:
+        
+        opcion = int(input("Teniendo en cuenta las ocpciones anteriores, ¿Con cual desea realizar la busqueda del paciente?: "))
+        
+        if opcion > 4 or opcion < 1:
+            print("\n=======ERROR!!!, El sistena no reconoce este valor,por favor vuelva a ingresar=======\n")
+            
+        elif opcion == 1:
+            nombre_parcial= input("\nPor favor ingrese su numbre parcial: ")
+            print (f"\nBuscando paciente que con nombre parcial{nombre_parcial}...Espere un momento por favor.\n")
+            print (f"El paciente {nombre_parcial} ha sido encontrado en la base de datos, procederemos con su consulta...")
+        
+        
+        elif opcion == 2:
+            nombre_completo= input("\nPor favor ingrese su numbre completo: ")
+            print (f"\nBuscando paciente que con el nombre {nombre_completo}....Espere un momento por favor.\n")
+            print (f"El paciente {nombre_completo} ha sido encontrado en la base de datos, procederemos con su consulta...")
+    
+        elif opcion == 3:
+            ID= int(input("\nPor favor ingrese su numbre parcial: "))
+            print (f"\nBuscando paciente que con el ID {ID}...Espere un momento por favor.\n")
+            print (f"El paciente {ID} ha sido encontrado en la base de datos, procederemos con su consulta...")
+                
+        
+        elif opcion == 4:
+            Diagnostico= input("\nPor favor ingrese su diagnostico para realizar un filtro entre todos los registrados: ")
+            print (f"\nBuscando paciente que con diagnostico coincidente con {Diagnostico}...Espere un momento por favor.\n")
+            print (f"El paciente {Diagnostico} ha sido encontrado en la base de datos, procederemos con su consulta...\n")
+
+#-------------------------------------------------------------------------------------------------------------------------
+#           Menu funciones registors
+
 def generar_reportes():
    
     print("\n--- Módulo de Reportes ---")
-    if not pacientes:
+    if not listaDePacientes:
         print("No hay pacientes registrados para generar reportes.")
         input("Presione Enter para volver al menú...")
         return
@@ -191,12 +201,14 @@ def generar_reportes():
     print("1. Pacientes mayores de 60 años")
     print("2. Diagnósticos más frecuentes")
     print("3. Cantidad total de pacientes")
+    print("4. Mostras pacientes")
+
     opcion_reporte = input("Seleccione una opción: ").strip()
 
     if opcion_reporte == "1":
         print("\n--- Reporte: Pacientes mayores de 60 años ---")
         pacientes_mayores = []
-        for p in pacientes:
+        for p in listaDePacientes:
             try:
                 
                 if int(p["edad"]) > 60:
@@ -215,7 +227,7 @@ def generar_reportes():
     elif opcion_reporte == "2":
         print("\n--- Reporte: Diagnósticos más frecuentes ---")
         contador_diagnosticos = {}
-        for p in pacientes:
+        for p in listaDePacientes:
             diagnostico = p["diagnostico"].strip().title()
             if diagnostico: 
                 contador_diagnosticos[diagnostico] = contador_diagnosticos.get(diagnostico, 0) + 1
@@ -230,76 +242,92 @@ def generar_reportes():
 
     elif opcion_reporte == "3":
         print("\n--- Reporte: Cantidad total de pacientes ---")
-        total_pacientes = len(pacientes)
+        total_pacientes = len(listaDePacientes)
         print(f"Actualmente hay un total de {total_pacientes} pacientes registrados en el sistema.")
+
+    elif opcion_reporte == "4":
+        print("\n--- Reporte: Informacion de Pacientes ---")
+        mostrar_pacientes() 
 
     else:
         print("Opción de reporte no válida.")
     
     input("\nPresione Enter para volver al menú...")
 
+#--------------------------------------------------------------------------------------------------------------
+def agregar_paciente():
+    print("\n--- Registrar nuevo paciente ---")
+    try:
+        id_paciente = int(input("Ingrese ID del paciente: ").strip())
+    except ValueError:
+        print("El ID debe ser un número entero.")
+        return
+    
+    for paciente in listaDePacientes:
+        if paciente["id"] == id_paciente:
+            print("Este ID ya existe. No se puede registrar un duplicado.")
+            return
+    
+    nombre = input("Ingrese nombre del paciente: ")
+    edad = input("Ingrese edad del paciente: ")
+    genero = input("Ingrese género del paciente: ")
+    diagnostico = input("Ingrese diagnóstico: ")
+    historial = []
+
+    while True:
+        entrada = input("Agregar entrada al historial (o presione Enter para terminar): ")
+        if entrada == "":
+            break
+        historial.append(entrada)
+    
+    addNuevoPaciente(id_paciente,nombre,edad,genero,diagnostico,historial)
+    print("Paciente registrado correctamente.\n")
+
+
+
+
+
+
+
+
 
 while True:
     print("\n===== MENÚ PRINCIPAL - CLÍNICA =====")
     print("1. Registrar nuevo paciente")
-    print("2. Mostrar pacientes")
-    print("3. Salir")
-    print("4. Modificar paciente")
-    print("Generar Reportes")
+    print("2. Buscar paciente")
+    print("3. Modificar paciente")
+    print("4. Eliminar Paciente")
+    print("5. Generar Reportes")
+    print("6. Salir")
 
     opcion = input("Seleccione una opción: ").strip()
 
     if opcion == "1":
         agregar_paciente()
     elif opcion == "2":
-        mostrar_pacientes()
-    elif opcion == "3":
-        print("Saliendo del sistema... Hasta pronto.")
-        break
-    elif opcion == "4":
-        modificar_paciente()
-    else:
-        print("Opción inválida. Intente nuevamente.")
-#--------------------------------------------------------------------------------------------------------       
-print ("Señor usuario, a continuacion podra observar las ocpciones para buscar a un paciente.\n")
-    
-"==============DISPONIBILIDAD================"
-    
-print("1. Nombre parcial del paciente.\n ")   
-    
-print("2. Nombre completo del paciente.\n   ") 
-    
-print("3. ID del paciente.\n ")
-    
-print("4. Diagnostico del paciente.\n  ")
-    
-while True:
-    
-    opcion = int(input("Teniendo en cuenta las ocpciones anteriores, ¿Con cual desea realizar la busqueda del paciente?: "))
-    
-    if opcion > 4 or opcion < 1:
-        print("\n=======ERROR!!!, El sistena no reconoce este valor,por favor vuelva a ingresar=======\n")
+        print("Buscar paciente")
+        menuBusqueda()
         
-    elif opcion == 1:
-        nombre_parcial= input("\nPor favor ingrese su numbre parcial: ")
-        print (f"\nBuscando paciente que con nombre parcial{nombre_parcial}...Espere un momento por favor.\n")
-        print (f"El paciente {nombre_parcial} ha sido encontrado en la base de datos, procederemos con su consulta...")
-    
-    
-    elif opcion == 2:
-        nombre_completo= input("\nPor favor ingrese su numbre completo: ")
-        print (f"\nBuscando paciente que con el nombre {nombre_completo}....Espere un momento por favor.\n")
-        print (f"El paciente {nombre_completo} ha sido encontrado en la base de datos, procederemos con su consulta...")
- 
-    elif opcion == 3:
-        ID= int(input("\nPor favor ingrese su numbre parcial: "))
-        print (f"\nBuscando paciente que con el ID {ID}...Espere un momento por favor.\n")
-        print (f"El paciente {ID} ha sido encontrado en la base de datos, procederemos con su consulta...")
-            
-     
-    elif opcion == 4:
-        Diagnostico= input("\nPor favor ingrese su diagnostico para realizar un filtro entre todos los registrados: ")
-        print (f"\nBuscando paciente que con diagnostico coincidente con {Diagnostico}...Espere un momento por favor.\n")
-        print (f"El paciente {Diagnostico} ha sido encontrado en la base de datos, procederemos con su consulta...\n")
+        
+    elif opcion == "3":
+        print("Modificando pacientes")
+        modificar_paciente()
+        
+    elif opcion == "4":
+        print("Eliminar pacientes")
+        
+        eliminarPaciente(23)
+        
+    elif opcion == "5":
+        print("Generar reportes")
+        generar_reportes()
+
+    elif opcion == "6":
+        print("Gracias por visitarnos");break
+
+    else:
+        print("Opción inválida")
+#--------------------------------------------------------------------------------------------------------       
+
         
 #-----------------------------------------------------------------------------------------------------------------------------------     
