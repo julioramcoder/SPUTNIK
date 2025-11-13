@@ -179,6 +179,65 @@ def modificar_paciente():
     print("No se encontró ningún paciente con ese ID.")
     input("Presione Enter para volver al menú...")
 
+def generar_reportes():
+   
+    print("\n--- Módulo de Reportes ---")
+    if not pacientes:
+        print("No hay pacientes registrados para generar reportes.")
+        input("Presione Enter para volver al menú...")
+        return
+
+    print("Seleccione el reporte que desea generar:")
+    print("1. Pacientes mayores de 60 años")
+    print("2. Diagnósticos más frecuentes")
+    print("3. Cantidad total de pacientes")
+    opcion_reporte = input("Seleccione una opción: ").strip()
+
+    if opcion_reporte == "1":
+        print("\n--- Reporte: Pacientes mayores de 60 años ---")
+        pacientes_mayores = []
+        for p in pacientes:
+            try:
+                
+                if int(p["edad"]) > 60:
+                    pacientes_mayores.append(p)
+            except ValueError:
+                
+                print(f"Advertencia: El paciente ID {p['id']} tiene una edad no numérica ('{p['edad']}') y no será incluido.")
+
+        if not pacientes_mayores:
+            print("No se encontraron pacientes mayores de 60 años.")
+        else:
+            print(f"Se encontraron {len(pacientes_mayores)} pacientes mayores de 60 años:")
+            for p in pacientes_mayores:
+                print(f"  - ID: {p['id']}, Nombre: {p['nombre']}, Edad: {p['edad']}, Diagnóstico: {p['diagnostico']}")
+
+    elif opcion_reporte == "2":
+        print("\n--- Reporte: Diagnósticos más frecuentes ---")
+        contador_diagnosticos = {}
+        for p in pacientes:
+            diagnostico = p["diagnostico"].strip().title()
+            if diagnostico: 
+                contador_diagnosticos[diagnostico] = contador_diagnosticos.get(diagnostico, 0) + 1
+        
+        if not contador_diagnosticos:
+            print("No hay diagnósticos registrados para mostrar.")
+        else:
+            diagnosticos_ordenados = sorted(contador_diagnosticos.items(), key=lambda item: item[1], reverse=True)
+            print("Frecuencia de diagnósticos:")
+            for diagnostico, cantidad in diagnosticos_ordenados:
+                print(f"  - {diagnostico}: {cantidad} paciente(s)")
+
+    elif opcion_reporte == "3":
+        print("\n--- Reporte: Cantidad total de pacientes ---")
+        total_pacientes = len(pacientes)
+        print(f"Actualmente hay un total de {total_pacientes} pacientes registrados en el sistema.")
+
+    else:
+        print("Opción de reporte no válida.")
+    
+    input("\nPresione Enter para volver al menú...")
+
 
 while True:
     print("\n===== MENÚ PRINCIPAL - CLÍNICA =====")
@@ -186,6 +245,7 @@ while True:
     print("2. Mostrar pacientes")
     print("3. Salir")
     print("4. Modificar paciente")
+    print("Generar Reportes")
 
     opcion = input("Seleccione una opción: ").strip()
 
