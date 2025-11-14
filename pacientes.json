@@ -64,5 +64,13 @@
         "genero": "f",
         "diagnostico": "covid",
         "historial": []
+    },
+    {
+        "id": 3,
+        "nombre": "pedro paco",
+        "edad": "",
+        "genero": "f",
+        "diagnostico": "fiebre aguda",
+        "historial": []
     }
 ]

@@ -329,7 +329,9 @@ def agregar_paciente():
     
     nombre = input("Ingrese nombre del paciente: ")
     edad = input("Ingrese edad del paciente: ")
-    genero = input("Ingrese género del paciente: ")
+    genero = ""
+    while not(genero == "f" or genero == "m"):
+        genero = input("Ingrese género del paciente: ")
     diagnostico = input("Ingrese diagnóstico: ")
     historial = []
 
