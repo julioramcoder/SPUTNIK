@@ -68,8 +68,9 @@ def filtrarPorNombre(_nombre):
         if paciente["nombre"] == _nombre:
             listaFiltrada.append(paciente)
     if listaFiltrada:
-        print(listaFiltrada)
-        return listaFiltrada
+        for paciente in listaFiltrada:
+            print(paciente)
+        
     else: print(f"No hay pacientes con el nombre: {_nombre}")
             
 
@@ -79,8 +80,9 @@ def filtrarPorDiagnostico(_diagnostico):
         if paciente["diagnostico"] == _diagnostico:
             listaFiltrada.append(paciente)
     if listaFiltrada:
-        print(listaFiltrada)
-        return listaFiltrada
+        
+        for paciente in listaFiltrada:
+            print(paciente)
     else: print(f"No hay pacientes con el diagnóstico de: {_diagnostico}")
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -208,18 +210,24 @@ def menuBusqueda():
         
     while True:
         
-        opcion = int(input("Elige una opción: "))
+        opcion = (input("Elige una opción: "))
+        
         
           
-        if opcion == 1:
+        if opcion == "1":
             nombre_completo= input("\nPor favor ingrese su numbre completo: ")
             print (f"\nBuscando paciente que con el nombre {nombre_completo}....Espere un momento por favor.\n")
             filtrarPorNombre(nombre_completo)
             break
             
     
-        elif opcion == 2:
-            ID= int(input("\nPor favor ingrese ID del paciente: "))
+        elif opcion == "2":
+            try:
+                ID = int(input("Ingrese el ID del paciente a modificar: ").strip())
+            except ValueError:
+                print("El ID debe ser un número entero.")
+                return
+        
             print (f"\nBuscando paciente que con el ID {ID}...Espere un momento por favor.\n")
             filtrarPorID(ID)
             break
@@ -227,7 +235,7 @@ def menuBusqueda():
             
                 
         
-        elif opcion == 3:
+        elif opcion == "3":
             Diagnostico= input("\nPor favor ingrese su diagnostico para realizar un filtro entre todos los registrados: ")
             print (f"\nBuscando pacientes que con diagnostico coincidente con {Diagnostico}...Espere un momento por favor.\n")
             filtrarPorDiagnostico(Diagnostico)

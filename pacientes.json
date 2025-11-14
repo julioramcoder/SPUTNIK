@@ -48,5 +48,21 @@
         "historial": [
             "reservado"
         ]
+    },
+    {
+        "id": 1,
+        "nombre": "1",
+        "edad": "f",
+        "genero": "e",
+        "diagnostico": "f",
+        "historial": []
+    },
+    {
+        "id": 2,
+        "nombre": "pedro pablo",
+        "edad": "23",
+        "genero": "f",
+        "diagnostico": "covid",
+        "historial": []
     }
 ]
