@@ -22,8 +22,21 @@ def addNewItem(_nombre,_precio,_cantidad):
 
 def agregarProducto():
     itemName = input("Nombre del producto: ")
-    itemPrice = float(input("Precio del producto: "))
-    itemCantidad = int(input("Cantidad de producto: "))
+    while True:
+        try:
+            itemPrice = float(input("Precio del producto: "))
+            itemPrice = abs(itemPrice)
+            break
+        except ValueError:
+            print("el precio debe ser un valor numérico")
+
+    while True:
+        try:
+            itemCantidad = int(input("Cantidad de producto: "))
+            itemCantidad = abs(itemCantidad)
+            break
+        except ValueError:
+            print("la cantidad debe ser un número")
 
     addNewItem(itemName, itemPrice, itemCantidad)
     print(f"Agregado producto: {itemName} con un precio de: {itemPrice} y una cantidad de: {itemCantidad}")
@@ -89,12 +102,12 @@ def estadisticas():
         print("2: costo total de inventario: ")
         print("3: salir")
         try:
-            menu= int(input)
+            menuE= int(input())
         except ValueError:
-            menu = 5
+            menuE = 5
             continue
 
-        match menu:
+        match menuE:
             case 1:
                 cantidadTotal()
             case 2:
