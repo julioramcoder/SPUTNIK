@@ -2,7 +2,7 @@
     {
         "nombre": "Juan Carlos P",
         "id": 12345,
-        "genero": "Masculino",
+        "genero": "masculino",
         "edad": 24,
         "diagnostico": "covid",
         "historial": [
@@ -22,7 +22,7 @@
     {
         "nombre": "esteban",
         "id": 1234567,
-        "genero": "Masculino",
+        "genero": "masculino",
         "edad": 67,
         "diagnostico": "urselas",
         "historial": [
@@ -32,7 +32,7 @@
     {
         "nombre": "jhonatan fernandez",
         "id": 123456789,
-        "genero": "Masculino",
+        "genero": "masculino",
         "edad": 54,
         "diagnostico": "fiebre",
         "historial": [
@@ -50,27 +50,14 @@
         ]
     },
     {
-        "id": 1,
-        "nombre": "1",
-        "edad": "f",
-        "genero": "e",
-        "diagnostico": "f",
-        "historial": []
-    },
-    {
-        "id": 2,
-        "nombre": "pedro pablo",
-        "edad": "23",
-        "genero": "f",
-        "diagnostico": "covid",
-        "historial": []
-    },
-    {
-        "id": 3,
-        "nombre": "pedro paco",
-        "edad": "",
-        "genero": "f",
-        "diagnostico": "fiebre aguda",
-        "historial": []
+        "id": 1017,
+        "nombre": "eduardo zapata",
+        "edad": 43,
+        "genero": "masculino",
+        "diagnostico": "loco del coco",
+        "historial": [
+            "est\u00e1 muy loco del coco",
+            "tambi\u00e9n est\u00e1 ido de la mente"
+        ]
     }
 ]

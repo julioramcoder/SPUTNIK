@@ -1,12 +1,17 @@
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 #
-#                         Funciones para inicializar una lista de pacientes
+#                         Funciones para inicializar una leer y actualizar json
 
 import json
 
+try:
+    with open("pacientes.json", "r") as archivo:
+        listaDePacientes = json.load(archivo)
+except (json.JSONDecodeError, FileNotFoundError):
+    listaDePacientes = []
 
-with open("pacientes.json", "r") as archivo:
-    listaDePacientes  = json.load(archivo)
+
+
 
 def actializarListaDePacientes():
     with open("pacientes.json", "w") as archivo:
@@ -140,7 +145,13 @@ def modificar_paciente():
             opcion = input("Seleccione una opción: ").strip()
 
             if opcion == "1":
-                nueva_edad = input("Ingrese la nueva edad: ")
+               
+                while True:
+                    try:
+                        nueva_edad = int(input("Ingrese la nueva edad: "))
+                        nueva_edad = abs(nueva_edad)
+                        break
+                    except ValueError: print(f"La edad debe ser un número entero")
                 confirmar = input(f"¿Desea cambiar la edad de {p['edad']} a {nueva_edad}? (s/n): ").strip().lower()
                 if confirmar == "s":
                     p["edad"] = nueva_edad
@@ -215,7 +226,7 @@ def menuBusqueda():
         
           
         if opcion == "1":
-            nombre_completo= input("\nPor favor ingrese su numbre completo: ")
+            nombre_completo= input("\nPor favor ingrese nombre completo del paciente: ")
             print (f"\nBuscando paciente que con el nombre {nombre_completo}....Espere un momento por favor.\n")
             filtrarPorNombre(nombre_completo)
             break
@@ -223,7 +234,7 @@ def menuBusqueda():
     
         elif opcion == "2":
             try:
-                ID = int(input("Ingrese el ID del paciente a modificar: ").strip())
+                ID = int(input("Ingrese el ID del paciente: ").strip())
             except ValueError:
                 print("El ID debe ser un número entero.")
                 return
@@ -317,21 +328,34 @@ def generar_reportes():
 def agregar_paciente():
     print("\n--- Registrar nuevo paciente ---")
     try:
-        id_paciente = int(input("Ingrese ID del paciente: ").strip())
+        id_paciente = int(input("Ingrese documento de identidad del paciente: ").strip())
+        id_paciente = abs(id_paciente)
     except ValueError:
-        print("El ID debe ser un número entero.")
+        print("El documento de identidad debe ser un número entero.")
         return
     
     for paciente in listaDePacientes:
         if paciente["id"] == id_paciente:
-            print("Este ID ya existe. No se puede registrar un duplicado.")
+            print("Este documento ya existe. No se puede registrar un duplicado.")
             return
     
-    nombre = input("Ingrese nombre del paciente: ")
-    edad = input("Ingrese edad del paciente: ")
+
+    while True:
+        nombre = input("Ingrese nombre del paciente: ")
+        if nombre.replace(" ", "").isalpha():
+            break
+        else:
+            print("El nombre solo debe contener letras, sin números.")
+    while True:
+        try:
+            edad = int(input("Ingrese edad del paciente: "))
+            edad = abs(edad)
+            break
+        except ValueError:print("La edad debe ser un número entero")
     genero = ""
     while not(genero == "f" or genero == "m"):
-        genero = input("Ingrese género del paciente: ")
+        genero = input("Ingrese género del paciente\n (f) para femenino | (m) para masculino: ")
+    genero = "femenino" if genero == "f" else  "masculino"
     diagnostico = input("Ingrese diagnóstico: ")
     historial = []
 
