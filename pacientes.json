@@ -1,0 +1,63 @@
+[
+    {
+        "nombre": "Juan Carlos P",
+        "id": 12345,
+        "genero": "masculino",
+        "edad": 24,
+        "diagnostico": "covid",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "Dayana Francisca",
+        "id": 123456,
+        "genero": "femenino",
+        "edad": 25,
+        "diagnostico": "fiebre",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "esteban",
+        "id": 1234567,
+        "genero": "masculino",
+        "edad": 67,
+        "diagnostico": "urselas",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "jhonatan fernandez",
+        "id": 123456789,
+        "genero": "masculino",
+        "edad": 54,
+        "diagnostico": "fiebre",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "nombre": "natalia dallas",
+        "id": 1234567890,
+        "genero": "femenino",
+        "edad": 28,
+        "diagnostico": "dolor de amores",
+        "historial": [
+            "reservado"
+        ]
+    },
+    {
+        "id": 1017,
+        "nombre": "eduardo zapata",
+        "edad": 43,
+        "genero": "masculino",
+        "diagnostico": "loco del coco",
+        "historial": [
+            "est\u00e1 muy loco del coco",
+            "tambi\u00e9n est\u00e1 ido de la mente"
+        ]
+    }
+]
