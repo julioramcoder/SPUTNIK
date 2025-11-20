@@ -1,19 +1,3 @@
-"""2. Estructura de datos y modularización:
-Mantén un inventario en memoria como lista de diccionarios, donde cada producto tenga:
-{"nombre": str, "precio": float, "cantidad": int}
-Crea un archivo principal app.py y un módulo servicios.py (o nombres equivalentes) con funciones:
-agregar_producto(inventario, nombre, precio, cantidad)
-mostrar_inventario(inventario)
-buscar_producto(inventario, nombre) → retorna el dict o None
-actualizar_producto(inventario, nombre, nuevo_precio=None, nueva_cantidad=None)
-eliminar_producto(inventario, nombre)
-calcular_estadisticas(inventario) → retorna tupla/dict con métricas
-Documenta cada función con docstring (qué hace, parámetros, retorno) y agrega comentarios breves."""
-
-
-
-
-
 import csv
 def loadInventario() -> list[dict]:
     try:
@@ -64,6 +48,13 @@ def agregarProducto(nombre: str, precio: float, cantidad: int) -> None:
     
     return
 
+def ingresarDatosProducto():
+    nombre = validarNombre()
+    precio = validarPrecio()
+    cantidad = validarCantidad()
+    agregarProducto(nombre,precio,cantidad)
+
+#--------------------------------------------------------------------------------------------------------------
 
 def validarNombre() -> str:
     name : str
@@ -90,32 +81,53 @@ def validarCantidad() -> int:
             print("ingrese una cantidad válida ")
 
 #-----------------------------------------------------------------------------------------
-def mostrarInventario():
+def mostrarInventario() -> None:
     print(f"{'nombre' :<15} {'precio':<15} {'cantidad' :<15}")
     for producto in inventario:
         print(f"{producto['nombre']:<15} {producto['precio']:<15} {producto['cantidad']:<15}")
+
+def mostrarProducto(nombre: str) -> None:
+    producto = buscarProducto(nombre)
+    if producto:
+        print(f"{'nombre':<15} {'precio':<15} {'cantidad':<15}")
+        print(f"{producto['nombre']:<15} {producto['precio']:<15} {producto['cantidad']:<15}")
+
 #------------------------------------------------------------------------------------------
 
-def ingresarDatosProducto():
+def actualizarProducto(nombre :str, nuevoPrecio :float = None, nuevaCantidad : int = None) -> dict:
+    producto = buscarProducto(nombre)
+    if producto:
+        if nuevoPrecio:
+            producto["precio"] = nuevoPrecio
+        if nuevaCantidad:
+            producto["cantidad"] = nuevaCantidad
+    return producto
+
+def actualizarProductoMenu():
     nombre = validarNombre()
-    precio = validarPrecio()
-    cantidad = validarCantidad()
-    agregarProducto(nombre,precio,cantidad)
-
-while True:
-    print("1: agregar nuevo producto")
-    print("2: monstrar inventario")
-    print(": salir")
-
-    opcion = input(": ")
-    if opcion == "1":
-        ingresarDatosProducto()
-    elif opcion == "2":
-        mostrarInventario()
-    elif opcion == "3":
-        break
-    else: print("opción inválida")
+    if not buscarProducto(nombre):
+        print(f"No se puede actualizar el producto {nombre} ya que no está en el inventario")
+        return
+    opcion = input(f"Actualizar precio de {nombre} (s/n): ")
+    if opcion == "s":
+        precio = validarPrecio()
+    else: precio = None
+    opcion = input(f"Actualizar cantidad de {nombre} (s/n): ")
+    if opcion == "s":
+        cantidad = validarCantidad()
+    else: cantidad = None
+    actualizarProducto(nombre,precio,cantidad)
+    saveInventario(inventario)
     
+#------------------------------------------------------------------------------------------
+def eliminarProducto(nombre : str):
+    producto = buscarProducto(nombre)
+    if producto:
+        inventario.remove(producto)
+        saveInventario(inventario)
+    
+
+#-----------------------------------------------------------------------------------------
 
 
 
