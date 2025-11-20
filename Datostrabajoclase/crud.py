@@ -45,7 +45,7 @@ class CRUD:
                     filas_actualizadas.append(fila)
         if not encontrado:
             return False    
-    #Guardaer los cambios en el archivo
+    #Guardar los cambios en el archivo
         with open(archivo, "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(filas_actualizadas)
