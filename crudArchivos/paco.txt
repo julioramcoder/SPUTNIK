@@ -1,0 +1,2 @@
+Primera linea de paco.txt
+esta es una nueva linea
