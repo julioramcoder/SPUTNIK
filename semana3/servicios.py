@@ -1,26 +1,4 @@
-import csv
-def loadInventario() -> list[dict]:
-    try:
-        with open("inventario.csv", "r", encoding="utf-8") as file:
-            reader = csv.DictReader(file)
-            inventario = list(reader)         
-    except:
-        inventario = []
-    return inventario
-
-inventario = loadInventario()
-
-
-def saveInventario(inventario : list[dict]):
-    try:
-        with open("inventario.csv", "w", newline="", encoding="utf-8") as file:
-            if inventario:
-                fields = inventario[0].keys()
-                writer = csv.DictWriter(file, fieldnames=fields)
-                writer.writeheader()
-                writer.writerows(inventario)
-    except: print("error al guardar inventario")
-
+from permanenciaDatos import *
 #------------------------------------------------------------------------------------------------------------------
 def crearProducto(nombre:str, precio: float, cantidad: int) -> dict:
     producto = {
@@ -130,5 +108,46 @@ def eliminarProducto(nombre : str):
 #-----------------------------------------------------------------------------------------
 
 
+def unidadesTotales() -> int:
+    totalUnidades = 0
+    if inventario:
+        for producto in inventario:
+            totalUnidades += producto["cantidad"]
+        return totalUnidades
+    return None
+
+def valorTotal() -> float:
+    totalValor = 0
+    if inventario:
+        for producto in inventario:
+            precioTotalProducto = producto["cantidad"] * producto["precio"] 
+            totalValor += precioTotalProducto
+        return totalValor
+    return None
+
+def productoMasCaro() -> dict:
+    masCaro = 0
+    productoReturn : dict = None
+    if inventario:
+        for producto in inventario:
+            if masCaro < producto["precio"]:
+                masCaro = producto["precio"]
+                productoReturn = producto
+    return productoReturn
+    
+def mayorStock():
+    masStack = 0
+    productoReturn : dict = None
+    if inventario:
+        for producto in inventario:
+            if masStack < producto["cantidad"]:
+                masStack = producto["cantidad"]
+                productoReturn = producto
+    return productoReturn
+    
+
+
+def estadisticas():
+    return
 
 
