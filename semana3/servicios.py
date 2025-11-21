@@ -1,4 +1,5 @@
 from permanenciaDatos import *
+import tkinter
 #------------------------------------------------------------------------------------------------------------------
 def crearProducto(nombre:str, precio: float, cantidad: int) -> dict:
     producto = {
@@ -130,8 +131,8 @@ def productoMasCaro() -> dict:
     productoReturn : dict = None
     if inventario:
         for producto in inventario:
-            if masCaro < producto["precio"]:
-                masCaro = producto["precio"]
+            if masCaro < float(producto["precio"]):
+                masCaro = float(producto["precio"])
                 productoReturn = producto
     return productoReturn
     
@@ -140,23 +141,70 @@ def mayorStock():
     productoReturn : dict = None
     if inventario:
         for producto in inventario:
-            if masStack < producto["cantidad"]:
-                masStack = producto["cantidad"]
+            if masStack < int(producto["cantidad"]):
+                masStack = int(producto["cantidad"])
                 productoReturn = producto
     return productoReturn
     
 
 
 def estadisticas():
-    print("1: total de unidades")
-    print("2: precio total")
-    opcion = input("selecciona una opción: ")
+   
+    while True:
+        print("1: total de unidades")
+        print("2: precio total")
+        print("3: producto mas costoso")
+        print("4: producto con mayor stock")
+        print("5: salir")
+        opcion = input("selecciona una opción: ")
 
-    if opcion == "1":
-       total = unidadesTotales()
-       print(f"el total es {total}")
-    elif opcion == "2":
-       total = valorTotal()
-       print(f"el total es {total}")
+        match opcion:
+
+            case "1":
+                total = unidadesTotales()
+                print(f"el total es {total}")
+            case "2":
+                total = valorTotal()
+                print(f"el total es {total}")
+
+            case "3":
+                producto = productoMasCaro()
+                print(f"el producto más costoso es {producto['nombre']} con un costo de {producto['precio']}")
+
+            case "4":
+                producto = mayorStock()
+                print(f"el producto con mas stock es {producto['nombre']} con una cantidad de: {producto['cantidad']} unidadaes")
+
+            case "5":
+                break
+
+            case _:
+                print("opción inválida")
 
 
+#-----------------------------------------------------------------------------------------------------------------
+
+def menuCargarArchivo():
+    archivo = tkinter()
+    8
+    while True:
+        
+        print("\n1: fucionar inventarios")
+        print("2: reemplazar inventario")
+        print("3: salir")
+        opcion = input("elige una opción: ")
+
+        match opcion:
+            case "1":
+                nuevoInventario = loadNuevoInventario(archivo)
+                fucionarInventarios(nuevoInventario)
+            
+            case "2":
+                nuevoInventario = loadNuevoInventario(archivo)
+                sobrescribirInventario(nuevoInventario)
+
+            case "3":
+                break
+
+            case _:
+                print("opción inválida")

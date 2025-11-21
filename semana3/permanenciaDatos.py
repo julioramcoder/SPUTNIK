@@ -1,4 +1,5 @@
 import csv
+
 def loadInventario() -> list[dict]:
     try:
         with open("inventario.csv", "r", encoding="utf-8") as file:
@@ -22,3 +23,26 @@ def saveInventario(inventario : list[dict]):
     except: print("error al guardar inventario")
 
 #-----------------------------------------------------------------------------------------------------------------
+
+def loadNuevoInventario(archivo):
+    try:
+        with open(archivo, "r", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            nuevoInventario = list(reader)
+            return nuevoInventario
+    except:
+            print("ruta no encontrada")
+            return None
+    
+def fucionarInventarios(nuevoInventario):
+    for producto in nuevoInventario:
+        inventario.append(producto)
+    saveInventario(inventario)
+    return inventario
+
+def sobrescribirInventario(nuevoInventario):
+    inventario = nuevoInventario
+    saveInventario(inventario)
+    return inventario
+    
+    
