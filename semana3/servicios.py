@@ -112,7 +112,7 @@ def unidadesTotales() -> int:
     totalUnidades = 0
     if inventario:
         for producto in inventario:
-            totalUnidades += producto["cantidad"]
+            totalUnidades += int(producto["cantidad"])
         return totalUnidades
     return None
 
@@ -120,7 +120,7 @@ def valorTotal() -> float:
     totalValor = 0
     if inventario:
         for producto in inventario:
-            precioTotalProducto = producto["cantidad"] * producto["precio"] 
+            precioTotalProducto = float( int(producto["cantidad"]) * float(producto["precio"])) 
             totalValor += precioTotalProducto
         return totalValor
     return None
@@ -148,6 +148,15 @@ def mayorStock():
 
 
 def estadisticas():
-    return
+    print("1: total de unidades")
+    print("2: precio total")
+    opcion = input("selecciona una opción: ")
+
+    if opcion == "1":
+       total = unidadesTotales()
+       print(f"el total es {total}")
+    elif opcion == "2":
+       total = valorTotal()
+       print(f"el total es {total}")
 
 
