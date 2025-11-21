@@ -3,7 +3,7 @@ import servicios
 import archivos
 
 def main():
-    inventario = [] # La lista empieza vacía siempre
+    inventario = [] 
     archivo_nombre = "Inventario.csv"
 
     while True:
@@ -71,7 +71,7 @@ def main():
                     inventario = datos_cargados
                     print("--- Inventario reemplazado ---")
                 else:
-                    # Lógica de fusión (mezclar)
+                
                     count_nuevos = 0
                     for nuevo in datos_cargados:
                         existente = servicios.buscar_producto(inventario, nuevo["nombre"])

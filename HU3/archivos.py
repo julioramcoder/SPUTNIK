@@ -1,10 +1,7 @@
-# archivos.py
+
 import csv
 
 def guardar_csv(inventario, ruta):
-    """
-    Guarda la lista de diccionarios en un archivo CSV.
-    """
     if len(inventario) == 0:
         print("--- El inventario está vacío, no se guardó nada ---")
         return
