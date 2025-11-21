@@ -30,4 +30,7 @@ while True:
             edad = int(input("nueva edad: "))
             myCrud.modificarRegistro(_id,archivo,nombre,edad)
         case "4":
+            _id = input("id: ")
+            myCrud.eliminarRegistro(_id,archivo)
+        case "5":
             break

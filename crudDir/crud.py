@@ -57,7 +57,19 @@ class CRUD:
                         registro[2] = edad
         self.guardarRegistro(archivo,lista)
     
-  
+    def eliminarRegistro(self, _id, archivo):
+        with open(archivo, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            lista = list(reader)
+            for registro in lista:
+                if registro[0] == _id:
+                  registroEliminar = registro
+            if registroEliminar:
+                lista.remove(registroEliminar)
+        self.guardarRegistro(archivo,lista)
+        
+
 
         
 
