@@ -35,19 +35,20 @@ class CRUD:
         
         
     def guardarRegistro(self, archivo, lista):
-        with open(archivo, "w") as file:
+        with open(archivo, "w" ,newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["id","nombre","edad"])
-        with open(archivo,"a") as file:
+        with open(archivo,"a",newline="") as file:
             writer = csv.writer(file)
             for row in lista:
 
                 writer.writerow(row)
 
     def modificarRegistro(self,_id, archivo, nombre=None, edad=None):
-        with open(archivo, "r") as file:
+        with open(archivo, "r", newline="") as file:
             reader = csv.reader(file)
-            lista = list(next(reader))
+            next(reader)
+            lista = list(reader)
             for registro in lista:
                 if registro[0] == _id:
                     if nombre:
@@ -55,6 +56,9 @@ class CRUD:
                     if edad:
                         registro[2] = edad
         self.guardarRegistro(archivo,lista)
+    
+  
+
         
 
 

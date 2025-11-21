@@ -25,7 +25,7 @@ while True:
             edad = int(input("edad "))
             myCrud.agregarRegistro(archivo, nombre,edad)
         case "3":
-            _id = int(input("id: "))
+            _id = (input("id: "))
             nombre = input("nuevo nombre: ")
             edad = int(input("nueva edad: "))
             myCrud.modificarRegistro(_id,archivo,nombre,edad)
