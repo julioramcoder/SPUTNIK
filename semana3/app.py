@@ -1,4 +1,5 @@
-from servicios import ingresarDatosProducto, mostrarInventario, actualizarProductoMenu,eliminarProducto,validarNombre, mostrarProducto, estadisticas,menuCargarArchivo
+from servicios import ingresarDatosProducto, mostrarInventario,actualizarProductoMenu
+from servicios import eliminarProducto,validarNombre, mostrarProducto, estadisticas,menuCargarArchivo, menuGuardarArchivo
 
 
 def saltoDeLinea():
@@ -11,8 +12,9 @@ while True:
     print("4: actualizar producto")
     print("5: eliminar producto")
     print("6: estadisticas")
-    print("7: cargar nuevo inventario")
-    print("8: salir")
+    print("7: exportar inventario")
+    print("8: cargar nuevo inventario")
+    print("9: salir")
 
     opcion = input()
    
@@ -52,9 +54,11 @@ while True:
             saltoDeLinea()
 
         case "7":
-            menuCargarArchivo()
+            menuGuardarArchivo()
         
         case "8":
+            menuCargarArchivo()
+        case "9":
             break
         
         case  _case:

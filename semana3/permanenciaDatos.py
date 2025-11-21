@@ -41,8 +41,16 @@ def fucionarInventarios(nuevoInventario):
     return inventario
 
 def sobrescribirInventario(nuevoInventario):
-    inventario = nuevoInventario
+
+    inventario.clear()
+    inventario.extend(nuevoInventario)
     saveInventario(inventario)
     return inventario
-    
+
+def exportarArchivo(archivo):
+    with open(archivo, "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file,fieldnames=["nombre","precio","cantidad"])
+        writer.writeheader()
+        writer.writerows(inventario)
+   
     

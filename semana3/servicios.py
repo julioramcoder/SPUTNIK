@@ -1,5 +1,25 @@
 from permanenciaDatos import *
-import tkinter
+#----------------------------------------------------------------------------------------------------------------
+import tkinter as tk
+from tkinter import filedialog
+
+def seleccionarArchivoAbrir():
+    ruta_archivo = filedialog.askopenfilename(
+        title="Seleccione un archivo",
+        filetypes=[("Todos los archivos", "*.*")]
+    )
+    return ruta_archivo 
+
+def seleccionarArchivoGuardar():
+    ruta_nueva = filedialog.asksaveasfilename(
+        title="Guardar archivo como...",
+        defaultextension=".csv",
+        filetypes=[("Archivos CSV", "*.csv"), ("Todos los archivos", "*.*")]
+    )
+    return ruta_nueva
+
+ventana = tk.Tk()
+ventana.withdraw() 
 #------------------------------------------------------------------------------------------------------------------
 def crearProducto(nombre:str, precio: float, cantidad: int) -> dict:
     producto = {
@@ -47,6 +67,9 @@ def validarPrecio() -> float:
     while True:
         try:
             precio = float(input("precio del producto: "))
+            if precio < 0:
+                precio("el precio debe ser positivo")
+                continue
             return precio
         except ValueError:
             print("ingrese un precio válido ")
@@ -55,6 +78,9 @@ def validarCantidad() -> int:
     while True:
         try:
             cantidad = int(input("cantidad del producto: "))
+            if cantidad <0:
+                print("la cantidad debe ser positiva")
+                continue
             return cantidad
         except ValueError:
             print("ingrese una cantidad válida ")
@@ -185,8 +211,8 @@ def estadisticas():
 #-----------------------------------------------------------------------------------------------------------------
 
 def menuCargarArchivo():
-    archivo = tkinter()
-    8
+    archivo = seleccionarArchivoAbrir()
+    
     while True:
         
         print("\n1: fucionar inventarios")
@@ -208,3 +234,9 @@ def menuCargarArchivo():
 
             case _:
                 print("opción inválida")
+#-----------------------------------------------------------------------------------------
+
+def menuGuardarArchivo():
+    archivo = seleccionarArchivoGuardar()
+    exportarArchivo(archivo)
+    print(f"inventario guardado como: {archivo}")
